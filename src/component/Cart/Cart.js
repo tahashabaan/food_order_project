@@ -8,8 +8,8 @@ const Cart = (props) => {
 
   const ctx = useContext(CartContext);
 
-  const addItemCartHandler = (item, amount) => {
-    ctx.onAddItem(item,amount)
+  const addItemCartHandler = (item) => {
+    ctx.onAddItem({...item, amount:1})
   }
 
   const removeItemCartHandler = (id) => {
@@ -26,8 +26,8 @@ const Cart = (props) => {
           name={item.name}
           price={item.price}
           amount={item.amount}
-          onAdd={addItemCartHandler.bind(null,item,1)}
-          onRemove={ctx.onRemoveItem.bind(null,item, item.id)}
+          onAdd={addItemCartHandler.bind(null, item)}
+          onRemove={removeItemCartHandler.bind(null,item.id)}
           />)}
         </ul>
         <div className={classes.total}>

@@ -1,90 +1,83 @@
 import React,{useState, useReducer} from 'react';
 import CartContext from './cart-context';
 
-// const cartValue ={
-//   items:[],
-//   totalAmount:0
-// }
+const cartValue = {
+  items:[],
+  totalAmount:0
+}
 
-// const cartReducer = (state, action) => {
+const cartReducer = (state, action) => {
 
-//   if ( action.type === 'ADD' ) {
+  if ( action.type === 'ADD' ) {
+    const updataTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+   
+    const existingCartItemIndex = state.items.findIndex(item => item.id === action.item.id)
+    const existingCartItem = state.items[existingCartItemIndex]
+
+    let updateItems;
+
+    if(existingCartItem){
+
+      const updateItem ={
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount
+      }
+      updateItems = [...state.items];
+      updateItems[existingCartItemIndex] = updateItem
+    } 
+    else{
+      updateItems = state.items.concat(action.item)
+    }
+
+  return {
+    items: updateItems,
+    totalAmount: updataTotalAmount
+  };
+  }
   
+  if ( action.type === 'REMOVE' ) {
 
+    const existingCartItemIndex = state.items.findIndex(item => item.id === action.id)
 
-//   }
+    const existingCartItem = state.items[existingCartItemIndex];
 
-//   return {cartValue}
-// }
+    const updataTotalAmount = state.totalAmount - existingCartItem.price ;
+
+    let updateItems;
+    if(existingCartItem.amount === 1){
+      updateItems = state.items.filter(item => item.id !== action.id)
+    }
+
+    else{
+      const updateItem = {
+        ...existingCartItem,
+        amount:existingCartItem.amount-1
+      }
+
+      updateItems = [...state.items];
+      updateItems[existingCartItemIndex] = updateItem
+    }
+
+    return{
+      totalAmount:updataTotalAmount,
+      items:updateItems
+    }
+  }
+
+  return {cartValue}
+}
 const CartProvider = (props) => {
   
-   const [cartItem, setCartItem] = useState([]);
-   const [totalAmount, setTotalAmount] = useState(0)
    const [showCart, setShowCart] = useState(false);
  
-  //  const [cartState, dispatchCart] = useReducer(cartReducer, cartValue)
+   const [cartState, dispatchCart] = useReducer(cartReducer, cartValue)
  
-   const addItemToCartHandler = (items,amount) => {
-     setCartItem(preItem => {
- 
-       const existingCartItemIndex = preItem.findIndex(item => item.id === items.id);
- 
-       const existingCartItem = preItem[existingCartItemIndex];
- 
-       let updateItems;
- 
-       if(existingCartItem){
-        existingCartItem.amount += amount;
-        const updateItem = {
-         ...existingCartItem
-         }
- 
-      updateItems =[...preItem];
-      updateItems[existingCartItemIndex] = updateItem
-       }
-       else{
-         updateItems = [...preItem,items]
-       }
-     return updateItems  }) 
-     
-     // setAmount
-     setTotalAmount((preAmount) => {
-       preAmount += items.price * items.amount;
-       return preAmount;
-     })
-
-    //  dispatchCart({type:'ADD', item:items});
- 
+   const addItemToCartHandler = (items) => {
+     dispatchCart({type:'ADD', item:items});
   }
-  const removeItemToCartHandler = (items,id) => {
-   setCartItem(preItem => {
-     const existingCartItemIndex = preItem.findIndex(item => item.id === id)
- 
-     const existingCartItem = preItem[existingCartItemIndex]
- 
-     let updateItems;
- 
-     if (existingCartItem.amount === 1){
-       updateItems = preItem.filter(item => item.id !== id)
-     }
- 
-     else {
-       existingCartItem.amount -= 1
-       const updateItem = {
-         ...existingCartItem
-       }
- 
-       updateItems = [...preItem];
-       updateItems[existingCartItemIndex] = updateItem
-     }
-     return updateItems
-   })
- 
-   setTotalAmount((preAmount) => {
-     preAmount -= items.price;
-     return preAmount;
-   })
-   
+  
+  const removeItemToCartHandler = (id) => {
+     dispatchCart({type: 'REMOVE', id:id})
  }
  
   const onShowCartHandler = () => {
@@ -96,17 +89,16 @@ const CartProvider = (props) => {
   }
  
   return <CartContext.Provider value={{
-   cartItem:cartItem,
-   showCart:showCart,
-   onAddItem:addItemToCartHandler,
-   onRemoveItem:removeItemToCartHandler,
-   onShowCart:onShowCartHandler,
-   onHideCart:onHideCartHandler,
-   totalAmount
+   cartItem: cartState.items,
+   totalAmount: cartState.totalAmount,
+   showCart: showCart,
+   onAddItem: addItemToCartHandler,
+   onRemoveItem: removeItemToCartHandler,
+   onShowCart: onShowCartHandler,
+   onHideCart: onHideCartHandler,
   }}>
    {props.children}
   </CartContext.Provider>
  }
-
-
-export default CartProvider
+ 
+export default CartProvider;
