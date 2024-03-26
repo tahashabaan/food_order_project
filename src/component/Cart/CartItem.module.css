@@ -1,0 +1,37 @@
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.item:not(:last-of-type){
+  border-bottom: 2px solid rgb(95, 6, 6);
+}
+
+.left div{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+.left span{
+  font-weight: bold;
+}
+button{
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 19px;
+}
+button:hover,
+ button:active{
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.3);
+ }
+.actions{
+ text-align: right;
+}
+
+.actions .button{
+  margin-right: 1rem;
+ }

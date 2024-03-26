@@ -1,0 +1,52 @@
+.cart {
+  font: inherit;
+  background-color: #4d1601;
+  cursor: pointer;
+  padding: 0.75rem 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button span {
+  font-weight: bold;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.4rem;
+  margin-right: 1rem;
+}
+
+.badge {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgb(192, 8, 8);
+  line-height: 2rem;
+  margin-left: 1rem;
+}
+
+.cart:hover .badge,
+.cart:active .badge {
+  background-color: #92320c;
+}
+
+@media only screen and (max-width: 768px) {
+  .cart {
+    padding: 0.75rem 1.5rem;
+  }
+  .icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+  }
+  .badge {
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+

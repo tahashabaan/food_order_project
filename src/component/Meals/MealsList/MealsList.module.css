@@ -1,0 +1,30 @@
+.list {
+  width: 60%;
+  margin: 3rem auto;
+  animation: slide-up 400ms ease-in-out backwards;
+}
+
+.list ul {
+  list-style: none;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .list {
+    width: 90%;
+  }
+
+  .list ul {
+    padding: 0;
+  }
+}

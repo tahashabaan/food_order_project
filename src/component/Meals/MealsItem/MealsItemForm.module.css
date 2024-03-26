@@ -1,0 +1,31 @@
+.form div {
+  margin-bottom: 0.4rem;
+}
+.form div label {
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+.form div input {
+  width: 3.2rem;
+  padding: 0.1rem;
+}
+.form div input:focus {
+  outline: none;
+}
+.form button {
+  width: fit-content;
+  padding: 0.3rem 1.2rem;
+  border-radius: 12px;
+  background-color: rgb(109, 15, 15);
+  border-color: rgb(109, 15, 15);
+  font-size: 16px;
+  color: white;
+}
+.form button:focus {
+  outline: none;
+}
+.form button:hover,
+.form button:active {
+  cursor: pointer;
+  opacity: 0.6;
+}

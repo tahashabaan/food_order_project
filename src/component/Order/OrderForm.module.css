@@ -1,0 +1,64 @@
+.order_form {
+  margin: 1em 0em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  justify-content: center;
+  width: 60%;
+
+  padding: 1em;
+}
+
+.control {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.control label {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  width: 30%;
+}
+.control input {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 80%;
+  outline: none;
+}
+.control input:hover,
+.control input :active {
+  border-color: #8a2b06;
+}
+
+.err {
+  font-size: 0.8em;
+  margin-top: 0.2em;
+}
+
+.err :hover,
+.err :active {
+  background-color: rgb(247, 25, 25);
+  border-color: rgb(243, 26, 26);
+  font-size: 16px;
+}
+
+@media screen and (max-width: 760px) {
+  .control {
+    flex-direction: column;
+    gap: 0.3em;
+  }
+  .control label {
+    width: 100%;
+  }
+
+  .control input {
+    width: 100%;
+  }
+
+  .order_form .actions {
+    margin-top: 0.2em;
+    display: flex;
+    justify-content: start;
+  }
+}
