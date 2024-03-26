@@ -28,8 +28,9 @@ This is a web application for ordering food online. Users can browse through a v
     npm install
 
   ## Usage
+  
   1. Start the development serve
-    ```bash
+     ```bash
      npm run start
 
 ## Technologies Used
