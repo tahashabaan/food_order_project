@@ -2,6 +2,7 @@
 
 This is a web application for ordering food online. Users can browse through a variety of food items, add them to their cart, and place orders securely through the app.
 
+demo:: https://order-food-web.netlify.app/
 ## Table of Contents
 
 - [Features](#features)
